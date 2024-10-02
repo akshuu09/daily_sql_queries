@@ -1,0 +1,6 @@
+WAQTD reporting manager’s name, his Sal, COMM of emp Jones.
+ANS:   SELECT ENAME ,SAL,COMM
+       FROM EMP
+       WHERE EMPNO = (SELECT MGR
+                      FROM EMP
+                      WHERE ENAME='JONES');
