@@ -1,0 +1,117 @@
+                   EMP MANAGER RELATIONSHIP
+
+1. WAQTD reporting manager’s name, his Sal, COMM of emp Jones.
+ANS:   SELECT ENAME ,SAL,COMM
+       FROM EMP
+       WHERE EMPNO = (SELECT MGR
+                      FROM EMP
+                      WHERE ENAME='JONES');
+
+2. WAQTD name, Sal, job if they are reporting to who is working as manager.
+ANS:   SELECT ENAME,SAL,JOB
+       FROM EMP
+       WHERE MGR IN (SELECT EMPNO
+                     FROM EMP
+                     WHERE JOB IN 'MANAGER');
+
+3. WAQTD emp name who is indirectly reporting to King.
+ANS:   SELECT ENAME
+       FROM EMP
+       WHERE MGR NOT IN (SELECT EMPNO
+                         FROM EMP
+                         WHERE ENAME='KING');
+
+4. WAQTD emp name who is reporting to Allen’s manager.
+ANS:  SELECT ENAME
+      FROM EMP
+      WHERE MGR IN (SELECT EMPNO
+                    FROM EMP
+      WHERE EMPNO IN (SELECT MGR
+                     FROM EMP
+      WHERE ENAME ='ALLEN'));
+
+5. WAQTD emp name who doesn’t any reporters to them.
+ANS:    SELECT ENAME
+        FROM EMP
+        WHERE MGR IS NULL;
+
+6. WAQTD reporting manager name who doesn’t have any reporting manager.
+ANS:   SELECT ENAME
+       FROM EMP
+       WHERE EMPNO IS NOT NULL
+       AND MGR IS NULL;
+
+7. WAQTD manger’s, manager of Smith.
+ ANS: SELECT ENAME
+      FROM EMP
+      WHERE EMPNO = (SELECT MGR
+                     FROM EMP
+      WHERE EMPNO = (SELECT MGR
+                     FROM EMP
+                     WHERE ENAME = 'SMITH'));
+
+8. WAQTD emp name who is indirectly reporting to Jones.
+ANS:  SELECT ENAME
+       FROM EMP
+       WHERE MGR  IN (SELECT EMPNO
+                      FROM EMP
+       WHERE MGR  IN (SELECT EMPNO
+                      FROM EMP
+                      WHERE ENAME='JONES'));
+
+
+9. WAQTD reporting manager of a Salesman.
+ANS:   SELECT ENAME
+        FROM EMP
+        WHERE EMPNO  IN (SELECT MGR
+                         FROM EMP
+                         WHERE JOB IN 'SALESMAN');
+
+10. WAQTD manager’s, manager’s, manager of Adams.
+ANS:    SELECT ENAME
+        FROM EMP
+        WHERE EMPNO IN (SELECT MGR
+                      FROM EMP
+        WHERE EMPNO IN (SELECT MGR
+                      FROM EMP
+        WHERE EMPNO IN (SELECT MGR
+                      FROM EMP
+                      WHERE ENAME='ADAMS')));
+
+11. WAQTD emp name who is having only one reporter.
+ANS:   SELECT ENAME
+       FROM EMP
+       WHERE EMPNO IN(SELECT MGR
+                      FROM EMP
+                      GROUP BY MGR
+                      HAVING COUNT(*)=1 );
+
+
+12. WAQTD emp name who have at least two reporters.
+ANS:  SELECT ENAME
+      FROM EMP
+      WHERE EMPNO IN(SELECT MGR
+                     FROM EMP
+                     GROUP BY MGR
+                     HAVING COUNT(*)>=2 );
+
+13. WAQTD emp name whose reporters have salary less than 2000.
+ANS:  SELECT ENAME
+      FROM EMP
+      WHERE EMPNO IN (SELECT MGR
+                      FROM EMP
+                      WHERE SAL < 2000);
+
+14. WAQTD emp name, Sal and DEPTNO of those reporting to Blake.
+ANS: SELECT ENAME ,SAL,DEPTNO
+     FROM EMP
+     WHERE MGR IN (SELECT EMPNO
+                   FROM EMP
+                   WHERE ENAME='BLAKE');
+
+15. WAQTD emp name, whose reporters are hired in FEB.
+ANS:  SELECT ENAME
+      FROM EMP
+      WHERE EMPNO IN (SELECT MGR
+      FROM EMP
+     WHERE HIREDATE LIKE '%FEB%')
