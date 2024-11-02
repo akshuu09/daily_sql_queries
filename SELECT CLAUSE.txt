@@ -89,5 +89,7 @@ ANS: SELECT SUM(SAL) TOTAL_SAL
      FROM EMP;
 
 26] WAQTD TOTAL SALARY & 3400 DEDUCTION IN HALF-TERM SAL
-ANS: 
-   
+ANS: select sum(sal) , sal-sal*12
+from emp
+ 
+    
