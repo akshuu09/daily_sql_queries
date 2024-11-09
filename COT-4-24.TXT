@@ -1,0 +1,99 @@
+RENAME FLIPKARTCUSTOMER TO FCCUST;
+
+Table renamed.
+
+SQL> ALTER TABLE EMAIL
+  2  ;
+
+*
+ERROR at line 2:
+ORA-02210: no options specified for ALTER TABLE 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  ALTER TABLE FCCUST
+  2* ADD FCEMAIL VARCHAR(25) NOT NULL
+  3  /
+
+Table altered.
+
+SQL> SELECT * FROM FCCUST;
+
+no rows selected
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+DEPT                           TABLE                                                                
+EMP                            TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+EHIKE                          TABLE                                                                
+EUPDATE                        TABLE                                                                
+FLIPCUSTOMER                   TABLE                                                                
+FCCUST                         TABLE                                                                
+
+8 rows selected.
+
+SQL> DROP TABLE FCCUST;
+
+Table dropped.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+DEPT                           TABLE                                                                
+EMP                            TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+EHIKE                          TABLE                                                                
+EUPDATE                        TABLE                                                                
+FLIPCUSTOMER                   TABLE                                                                
+BIN$j5f71cIXS7qW21eJWj3Q0g==$0 TABLE                                                                
+
+8 rows selected.
+
+SQL> FALSHBACK TABLE FCCUST TO BEFORE DROP;
+SP2-0734: unknown command beginning "FALSHBACK ..." - rest of line ignored.
+SQL> FLASHBACK TABLE FCCUST TO BEFORE DROP;
+
+Flashback complete.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+DEPT                           TABLE                                                                
+EMP                            TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+EHIKE                          TABLE                                                                
+EUPDATE                        TABLE                                                                
+FLIPCUSTOMER                   TABLE                                                                
+FCCUST                         TABLE                                                                
+
+8 rows selected.
+
+SQL> SELECT * FROM SALGRADE;
+
+     GRADE      LOSAL      HISAL                                                                    
+---------- ---------- ----------                                                                    
+         1        700       1200                                                                    
+         2       1201       1400                                                                    
+         3       1401       2000                                                                    
+         4       2001       3000                                                                    
+         5       3001       9999                                                                    
+
+SQL> TRUNCATE TABLE SALGRADE;
+
+Table truncated.
+
+SQL> SELECT * FROM SALGRADE;
+
+no rows selected
+
+SQL> 
